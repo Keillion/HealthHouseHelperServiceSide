@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="keillion.github.dao.UserDefStatisticsMapper" >
+  <resultMap id="BaseResultMap" type="keillion.github.pojo.UserDefStatistics" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="quarter" property="quarter" jdbcType="INTEGER" />
+    <result column="month" property="month" jdbcType="INTEGER" />
+    <result column="date" property="date" jdbcType="INTEGER" />
+    <result column="week" property="week" jdbcType="INTEGER" />
+    <result column="day" property="day" jdbcType="INTEGER" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="house" property="house" jdbcType="INTEGER" />
+    <result column="seller" property="seller" jdbcType="INTEGER" />
+    <result column="costomer" property="costomer" jdbcType="BIGINT" />
+    <result column="card" property="card" jdbcType="BIGINT" />
+    <result column="income" property="income" jdbcType="BIGINT" />
+    <result column="numOfTimes" property="numoftimes" jdbcType="BIGINT" />
+    <result column="numOfTimes2" property="numoftimes2" jdbcType="BIGINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, year, quarter, month, date, week, day, startTime, endTime, house, seller, 
+    costomer, card, income, numOfTimes, numOfTimes2, description
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="keillion.github.pojo.UserDefStatisticsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from userDefStatistics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from userDefStatistics
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from userDefStatistics
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="keillion.github.pojo.UserDefStatistics" >
+    insert into userDefStatistics (id, title, year, 
+      quarter, month, date, 
+      week, day, startTime, 
+      endTime, house, seller, 
+      costomer, card, income, 
+      numOfTimes, numOfTimes2, description
+      )
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{year,jdbcType=INTEGER}, 
+      #{quarter,jdbcType=INTEGER}, #{month,jdbcType=INTEGER}, #{date,jdbcType=INTEGER}, 
+      #{week,jdbcType=INTEGER}, #{day,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP}, 
+      #{endtime,jdbcType=TIMESTAMP}, #{house,jdbcType=INTEGER}, #{seller,jdbcType=INTEGER}, 
+      #{costomer,jdbcType=BIGINT}, #{card,jdbcType=BIGINT}, #{income,jdbcType=BIGINT}, 
+      #{numoftimes,jdbcType=BIGINT}, #{numoftimes2,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="keillion.github.pojo.UserDefStatistics" >
+    insert into userDefStatistics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="quarter != null" >
+        quarter,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="week != null" >
+        week,
+      </if>
+      <if test="day != null" >
+        day,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="endtime != null" >
+        endTime,
+      </if>
+      <if test="house != null" >
+        house,
+      </if>
+      <if test="seller != null" >
+        seller,
+      </if>
+      <if test="costomer != null" >
+        costomer,
+      </if>
+      <if test="card != null" >
+        card,
+      </if>
+      <if test="income != null" >
+        income,
+      </if>
+      <if test="numoftimes != null" >
+        numOfTimes,
+      </if>
+      <if test="numoftimes2 != null" >
+        numOfTimes2,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="quarter != null" >
+        #{quarter,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=INTEGER},
+      </if>
+      <if test="week != null" >
+        #{week,jdbcType=INTEGER},
+      </if>
+      <if test="day != null" >
+        #{day,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="house != null" >
+        #{house,jdbcType=INTEGER},
+      </if>
+      <if test="seller != null" >
+        #{seller,jdbcType=INTEGER},
+      </if>
+      <if test="costomer != null" >
+        #{costomer,jdbcType=BIGINT},
+      </if>
+      <if test="card != null" >
+        #{card,jdbcType=BIGINT},
+      </if>
+      <if test="income != null" >
+        #{income,jdbcType=BIGINT},
+      </if>
+      <if test="numoftimes != null" >
+        #{numoftimes,jdbcType=BIGINT},
+      </if>
+      <if test="numoftimes2 != null" >
+        #{numoftimes2,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="keillion.github.pojo.UserDefStatistics" >
+    update userDefStatistics
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="quarter != null" >
+        quarter = #{quarter,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=INTEGER},
+      </if>
+      <if test="week != null" >
+        week = #{week,jdbcType=INTEGER},
+      </if>
+      <if test="day != null" >
+        day = #{day,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="house != null" >
+        house = #{house,jdbcType=INTEGER},
+      </if>
+      <if test="seller != null" >
+        seller = #{seller,jdbcType=INTEGER},
+      </if>
+      <if test="costomer != null" >
+        costomer = #{costomer,jdbcType=BIGINT},
+      </if>
+      <if test="card != null" >
+        card = #{card,jdbcType=BIGINT},
+      </if>
+      <if test="income != null" >
+        income = #{income,jdbcType=BIGINT},
+      </if>
+      <if test="numoftimes != null" >
+        numOfTimes = #{numoftimes,jdbcType=BIGINT},
+      </if>
+      <if test="numoftimes2 != null" >
+        numOfTimes2 = #{numoftimes2,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="keillion.github.pojo.UserDefStatistics" >
+    update userDefStatistics
+    set title = #{title,jdbcType=VARCHAR},
+      year = #{year,jdbcType=INTEGER},
+      quarter = #{quarter,jdbcType=INTEGER},
+      month = #{month,jdbcType=INTEGER},
+      date = #{date,jdbcType=INTEGER},
+      week = #{week,jdbcType=INTEGER},
+      day = #{day,jdbcType=INTEGER},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      house = #{house,jdbcType=INTEGER},
+      seller = #{seller,jdbcType=INTEGER},
+      costomer = #{costomer,jdbcType=BIGINT},
+      card = #{card,jdbcType=BIGINT},
+      income = #{income,jdbcType=BIGINT},
+      numOfTimes = #{numoftimes,jdbcType=BIGINT},
+      numOfTimes2 = #{numoftimes2,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

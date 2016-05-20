@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="keillion.github.dao.CardClassMapper" >
+  <resultMap id="BaseResultMap" type="keillion.github.pojo.CardClass" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="iniPrice" property="iniprice" jdbcType="INTEGER" />
+    <result column="iniValue" property="inivalue" jdbcType="INTEGER" />
+    <result column="unitPrice" property="unitprice" jdbcType="INTEGER" />
+    <result column="maxPeople" property="maxpeople" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="validTerm" property="validterm" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, type, iniPrice, iniValue, unitPrice, maxPeople, description, validTerm
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="keillion.github.pojo.CardClassExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from cardClass
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cardClass
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cardClass
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="keillion.github.pojo.CardClass" >
+    insert into cardClass (id, name, type, 
+      iniPrice, iniValue, unitPrice, 
+      maxPeople, description, validTerm
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{iniprice,jdbcType=INTEGER}, #{inivalue,jdbcType=INTEGER}, #{unitprice,jdbcType=INTEGER}, 
+      #{maxpeople,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{validterm,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="keillion.github.pojo.CardClass" >
+    insert into cardClass
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="iniprice != null" >
+        iniPrice,
+      </if>
+      <if test="inivalue != null" >
+        iniValue,
+      </if>
+      <if test="unitprice != null" >
+        unitPrice,
+      </if>
+      <if test="maxpeople != null" >
+        maxPeople,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="validterm != null" >
+        validTerm,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="iniprice != null" >
+        #{iniprice,jdbcType=INTEGER},
+      </if>
+      <if test="inivalue != null" >
+        #{inivalue,jdbcType=INTEGER},
+      </if>
+      <if test="unitprice != null" >
+        #{unitprice,jdbcType=INTEGER},
+      </if>
+      <if test="maxpeople != null" >
+        #{maxpeople,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="validterm != null" >
+        #{validterm,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="keillion.github.pojo.CardClass" >
+    update cardClass
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="iniprice != null" >
+        iniPrice = #{iniprice,jdbcType=INTEGER},
+      </if>
+      <if test="inivalue != null" >
+        iniValue = #{inivalue,jdbcType=INTEGER},
+      </if>
+      <if test="unitprice != null" >
+        unitPrice = #{unitprice,jdbcType=INTEGER},
+      </if>
+      <if test="maxpeople != null" >
+        maxPeople = #{maxpeople,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="validterm != null" >
+        validTerm = #{validterm,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="keillion.github.pojo.CardClass" >
+    update cardClass
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      iniPrice = #{iniprice,jdbcType=INTEGER},
+      iniValue = #{inivalue,jdbcType=INTEGER},
+      unitPrice = #{unitprice,jdbcType=INTEGER},
+      maxPeople = #{maxpeople,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      validTerm = #{validterm,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

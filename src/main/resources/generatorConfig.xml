@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE generatorConfiguration    
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"    
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">    
+<generatorConfiguration>   
+
+<!-- pom.xml右键;run as;maven build...;goal填写mybatis-generator:generate。以此来更新代码 -->
+ 
+<!-- 数据库驱动 -->    
+    <classPathEntry  location="C:\Users\Keillion\.m2\repository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar"/>    
+    <context id="DB2Tables"  targetRuntime="MyBatis3">    
+        <commentGenerator>    
+            <property name="suppressDate" value="true"/>    
+            <!-- 是否去除自动生成的注释 true:是: false:否 -->
+            <property name="suppressAllComments" value="true"/>    
+        </commentGenerator>    
+        <!--数据库链接URL，用户名、密码 -->    
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/db_heahouhelper" userId="username" password="password">    
+        </jdbcConnection>    
+        <javaTypeResolver>    
+            <property name="forceBigDecimals" value="false"/>    
+        </javaTypeResolver>    
+        <!-- 生成模型的包名和位置 -->    
+        <javaModelGenerator targetPackage="keillion.github.pojo" targetProject="D:/programFile/eclipse/jee-mars/workplace/HeaHouHelper/src/main/java">    
+            <property name="enableSubPackages" value="true"/>    
+            <property name="trimStrings" value="true"/>    
+        </javaModelGenerator>    
+        <!-- 生成映射文件的包名和位置 -->    
+        <sqlMapGenerator targetPackage="keillion.github.mapping" targetProject="D:/programFile/eclipse/jee-mars/workplace/HeaHouHelper/src/main/java">    
+            <property name="enableSubPackages" value="true"/>    
+        </sqlMapGenerator>    
+        <!-- 生成DAO的包名和位置 -->    
+        <javaClientGenerator type="XMLMAPPER" targetPackage="keillion.github.dao" targetProject="D:/programFile/eclipse/jee-mars/workplace/HeaHouHelper/src/main/java">    
+            <property name="enableSubPackages" value="true"/>    
+        </javaClientGenerator>    
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名 -->    
+        <table tableName="house" domainObjectName="House" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false"></table> 
+        <table tableName="employee" domainObjectName="Employee" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false"></table> 
+        <table tableName="cardClass" domainObjectName="CardClass" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false"></table> 
+        <table tableName="costomer" domainObjectName="Costomer" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false"></table> 
+        <table tableName="card" domainObjectName="Card" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false"></table> 
+        <table tableName="sellRecord" domainObjectName="SellRecord" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false"></table> 
+        <table tableName="saleStatistics" domainObjectName="SaleStatistics" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false"></table>  
+        <table tableName="attendRecord" domainObjectName="AttendRecord" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false"></table> 
+        <table tableName="attendStatistics" domainObjectName="AttendStatistics" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false"></table>
+        <table tableName="house-employee" domainObjectName="HouseEmployee" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false"></table> 
+        <table tableName="userDefStatistics" domainObjectName="UserDefStatistics" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="true" selectByExampleQueryId="false"></table>
+    </context>    
+</generatorConfiguration>    

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="keillion.github.dao.CardMapper" >
+  <resultMap id="BaseResultMap" type="keillion.github.pojo.Card" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="owner" property="owner" jdbcType="BIGINT" />
+    <result column="cclass" property="cclass" jdbcType="INTEGER" />
+    <result column="house" property="house" jdbcType="INTEGER" />
+    <result column="value" property="value" jdbcType="INTEGER" />
+    <result column="seller" property="seller" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="expires" property="expires" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, owner, cclass, house, value, seller, description, expires
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="keillion.github.pojo.CardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from card
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from card
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from card
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="keillion.github.pojo.Card" >
+    insert into card (id, owner, cclass, 
+      house, value, seller, 
+      description, expires)
+    values (#{id,jdbcType=BIGINT}, #{owner,jdbcType=BIGINT}, #{cclass,jdbcType=INTEGER}, 
+      #{house,jdbcType=INTEGER}, #{value,jdbcType=INTEGER}, #{seller,jdbcType=INTEGER}, 
+      #{description,jdbcType=VARCHAR}, #{expires,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="keillion.github.pojo.Card" >
+    insert into card
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="owner != null" >
+        owner,
+      </if>
+      <if test="cclass != null" >
+        cclass,
+      </if>
+      <if test="house != null" >
+        house,
+      </if>
+      <if test="value != null" >
+        value,
+      </if>
+      <if test="seller != null" >
+        seller,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="expires != null" >
+        expires,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="owner != null" >
+        #{owner,jdbcType=BIGINT},
+      </if>
+      <if test="cclass != null" >
+        #{cclass,jdbcType=INTEGER},
+      </if>
+      <if test="house != null" >
+        #{house,jdbcType=INTEGER},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=INTEGER},
+      </if>
+      <if test="seller != null" >
+        #{seller,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="expires != null" >
+        #{expires,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="keillion.github.pojo.Card" >
+    update card
+    <set >
+      <if test="owner != null" >
+        owner = #{owner,jdbcType=BIGINT},
+      </if>
+      <if test="cclass != null" >
+        cclass = #{cclass,jdbcType=INTEGER},
+      </if>
+      <if test="house != null" >
+        house = #{house,jdbcType=INTEGER},
+      </if>
+      <if test="value != null" >
+        value = #{value,jdbcType=INTEGER},
+      </if>
+      <if test="seller != null" >
+        seller = #{seller,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="expires != null" >
+        expires = #{expires,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="keillion.github.pojo.Card" >
+    update card
+    set owner = #{owner,jdbcType=BIGINT},
+      cclass = #{cclass,jdbcType=INTEGER},
+      house = #{house,jdbcType=INTEGER},
+      value = #{value,jdbcType=INTEGER},
+      seller = #{seller,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      expires = #{expires,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
