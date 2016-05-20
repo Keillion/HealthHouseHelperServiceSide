@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import keillion.github.pojo.EmployeeExample.Criteria;
-
 public class CostomerExample {
     protected String orderByClause;
 

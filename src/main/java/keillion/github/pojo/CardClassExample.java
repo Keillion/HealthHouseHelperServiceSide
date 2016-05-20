@@ -3,8 +3,6 @@ package keillion.github.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
-import keillion.github.pojo.CostomerExample.Criteria;
-
 public class CardClassExample {
     protected String orderByClause;
 

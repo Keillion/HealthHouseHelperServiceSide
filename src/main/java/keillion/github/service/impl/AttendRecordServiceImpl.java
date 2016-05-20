@@ -1,5 +1,7 @@
 package keillion.github.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -78,8 +80,43 @@ public class AttendRecordServiceImpl implements IAttendRecordService {
 		if(card != null){
 			or.andCardLike("%"+card+"%");
 		}
+		if(minPeople != null || maxPeople != null){
+			if(maxPeople == null){
+				or.andPeopleGreaterThan(minPeople);
+			}else if(minPeople == null){
+				or.andPeopleLessThan(maxPeople);
+			}else{
+				or.andPeopleBetween(minPeople, maxPeople);
+			}
+		}
+		if(minCost != null || maxCost != null){
+			if(maxCost == null){
+				or.andCostGreaterThan(minCost);
+			}else if(minCost == null){
+				or.andCostLessThan(maxCost);
+			}else{
+				or.andCostBetween(minCost, maxCost);
+			}
+		}
+		if(minTime != null || maxTime != null){
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			try{
+				Date min = minTime != null ? sdf.parse(minTime) : null;
+				Date max = maxTime != null ? sdf.parse(maxTime) : null;
+				if(max == null){
+					or.andTimeGreaterThan(min);
+				}else if(min == null){
+					or.andTimeLessThan(max);
+				}else{
+					or.andTimeBetween(min, max);
+				}
+			}catch(Exception ex){}
+		}
 		if(correct != null){
 			or.andCorrectEqualTo(correct);
+		}
+		if(isDisable != null){
+			or.andIsdisableEqualTo(isDisable?1:0);
 		}
 		return attendRecordDao.selectByExample(example);
 	}

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import keillion.github.pojo.CardClassExample.Criteria;
-
 public class CardExample {
     protected String orderByClause;
 
